@@ -1,3 +1,50 @@
+# Algorithm
+
+## 1. Start  
+## 2. Declare Structures  
+   - Define a structure `Node` containing:  
+     - `data` (integer)  
+     - `next` (pointer to next node)  
+
+## 3. main() Function  
+   1. Declare variables:  
+      - `head` (pointer to store the head of the linked list)  
+      - `n` (number of nodes)  
+      - `value` (to store user input)  
+      - `i` (loop counter)  
+
+   2. Clear the screen using `clrscr()` (for Turbo C users)  
+
+   3. Prompt the user for the number of nodes and read `n`  
+
+   4. Loop from `0` to `n-1`:  
+      - Ask for node value  
+      - If `head` is `NULL`, create the first node using `createNode(value)`  
+      - Otherwise, insert the node at the end using `insertNode(head, value)`
+
+   5. Display the linked list using `displayList(head)`
+
+   6. Wait for user input using `getch()`
+
+   7. End  
+
+## 4. createNode(value) Function  
+   - Allocate memory for a new node  
+   - Assign `data = value`  
+   - Set `next = NULL`  
+   - Return the newly created node  
+
+## 5. insertNode(head, value) Function  
+   - Create a new node using `createNode(value)`  
+   - Traverse to the last node of the linked list  
+   - Set `lastNode->next = newNode`  
+
+## 6. displayList(head) Function  
+   - If `head` is `NULL`, print "List is empty" and return  
+   - Traverse the list and print `data` of each node  
+   - Print `NULL` at the end 
+
+
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
