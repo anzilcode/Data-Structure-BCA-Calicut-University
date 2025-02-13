@@ -1,18 +1,22 @@
 # Exchange Sort Algorithm
 
 ## Algorithm:
-1. **Input the Array**
-   - Read `n`, the number of elements.
-   - Read `n` elements into an array.
 
-2. **Sorting using Exchange Sort**
-   - Use a nested loop:
-     - Outer loop runs from `0` to `n-1`.
-     - Inner loop runs from `i+1` to `n`.
-     - Swap `arr[i]` and `arr[j]` if `arr[i] > arr[j]`.
+### Step 1: Input the Array
+1. Start.
+2. Declare an array `arr[]` and an integer `n` for the number of elements.
+3. Accept `n` from the user.
+4. Input `n` elements into the array.
 
-3. **Output the Sorted Array**
-   - Print the array elements after sorting.
+### Step 2: Sorting using Exchange Sort
+5. Loop through the array from index `0` to `n-2`:
+   - For each `i`, loop from `i+1` to `n-1`:
+     - If `arr[i] > arr[j]`, swap `arr[i]` and `arr[j]`.
+   - This ensures that smaller elements bubble toward the beginning.
+
+### Step 3: Output the Sorted Array
+6. Print the sorted array.
+7. Stop.
 
 
 #include <stdio.h>
