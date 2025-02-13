@@ -1,72 +1,72 @@
-// ## Algorithm  
+## Algorithm for Appending Two Arrays
 
-1. Start  
-2. Declare variables  
-   - arrA[SIZE], arrB[SIZE], arrC[SIZE] → Arrays to store elements  
-   - sizeA, sizeB → Variables to store the sizes of input arrays  
-   - i → Loop counter  
-3. Clear screen using clrscr() (Turbo C-specific)  
-4. Input the first array  
-   - Prompt the user: "Enter the size of first Array:"  
-   - Read sizeA using scanf("%d", &sizeA)  
-   - Prompt the user: "Enter the elements:"  
-   - Read sizeA elements into arrA using a loop  
-5. Input the second array  
-   - Prompt the user: "Enter the size of second Array:"  
-   - Read sizeB using scanf("%d", &sizeB)  
-   - Prompt the user: "Enter the elements:"  
-   - Read sizeB elements into arrB using a loop  
-6. Merge the arrays  
-   - Copy all elements of arrA into arrC  
-   - Copy all elements of arrB into arrC after arrA  
-7. Display the merged array  
-   - Print "Combined array:"  
-   - Loop through arrC and print all elements using printf("%d ", arrC[i])  
-8. Wait for user input using getch() (Turbo C-specific)  
-9. End  
+### 1. Start
 
----
+### 2. Define `main()` function
+   - Declare integer variables `size1`, `size2`, and `i`.
+   - Declare three arrays: `arr1` of size `SIZE`, `arr2` of size `SIZE`, and `result` of size `SIZE * 2`.
+   - Clear screen using `clrscr()` (specific to Turbo C).
+   - Prompt user to enter the number of elements in the first array.
+   - Read and store the values in `arr1`.
+   - Prompt user to enter the number of elements in the second array.
+   - Read and store the values in `arr2`.
+   - Call `appendArrays(arr1, size1, arr2, size2, result)`.
+   - Print the appended array.
+   - Wait for user input using `getch()`.
+   - End.
+
+### 3. Define function `appendArrays(arr1, size1, arr2, size2, result)`
+   - Declare integer variables `i` and `j`.
+   - Copy all elements of `arr1` into `result`.
+   - Copy all elements of `arr2` into `result` after `arr1` elements.
+   - Return the appended array.
+
+### 4. End
 
 ## Code Implementation  
 ```c
 #include <stdio.h>
 #include <conio.h>
-
 #define SIZE 10
 
-int main() {
-    int arrA[SIZE], arrB[SIZE], arrC[SIZE];
-    int sizeA, sizeB, i;
+void appendArrays(int arr1[], int size1, int arr2[], int size2, int result[]) {
+    int i, j;
 
+    for (i = 0; i < size1; i++) {
+        result[i] = arr1[i];
+    }
+
+    for (j = 0; j < size2; j++) {
+        result[i + j] = arr2[j];
+    }
+}
+
+int main() {
+    int size1, size2, i;
+    int arr1[SIZE], arr2[SIZE], result[SIZE * 2];
     clrscr();
 
-    printf("Enter the size of first Array: ");
-    scanf("%d", &sizeA);
+    printf("Enter the number of elements in the first array: ");
+    scanf("%d", &size1);
 
-    printf("Enter the elements: ");
-    for (i = 0; i < sizeA; i++) {
-        scanf("%d", &arrA[i]);
+    printf("Enter elements for the first array: ");
+    for (i = 0; i < size1; i++) {
+        scanf("%d", &arr1[i]);
     }
 
-    printf("Enter the size of second Array: ");
-    scanf("%d", &sizeB);
+    printf("Enter the number of elements in the second array: ");
+    scanf("%d", &size2);
 
-    printf("Enter the elements: ");
-    for (i = 0; i < sizeB; i++) {
-        scanf("%d", &arrB[i]);
+    printf("Enter elements for the second array: ");
+    for (i = 0; i < size2; i++) {
+        scanf("%d", &arr2[i]);
     }
 
-    for (i = 0; i < sizeA; i++) {
-        arrC[i] = arrA[i];
-    }
+    appendArrays(arr1, size1, arr2, size2, result);
 
-    for (i = 0; i < sizeB; i++) {
-        arrC[sizeA + i] = arrB[i];
-    }
-
-    printf("Combined array: ");
-    for (i = 0; i < sizeA + sizeB; i++) {
-        printf("%d ", arrC[i]);
+    printf("Appended Array: ");
+    for (i = 0; i < size1 + size2; i++) {
+        printf("%d ", result[i]);
     }
 
     getch();
