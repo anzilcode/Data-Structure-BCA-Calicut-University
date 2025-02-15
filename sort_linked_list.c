@@ -1,36 +1,45 @@
-## Algorithm for Sorting a Singly Linked List 
+## Sorting a Singly Linked List
+
+### Algorithm
 
 ### 1. Start
 
 ### 2. Define a structure `Node`
-   - Contains `data`
+   - Contains an integer `data`
    - Pointer `next` to the next node
 
 ### 3. Define `main()`
    - Initialize `head` as `NULL`
-   - Insert elements into the linked list using `push`
+   - Insert elements into the linked list using `insertNode()`
    - Print the linked list before sorting
    - Call `bubbleSort(head)`
    - Print the sorted linked list
 
-### 4. Define `push(head_ref, new_data)`
+### 4. Define `insertNode(head_ref, data)`
    - Create a new node
    - Assign `data` to the new node
-   - Set `next` of the new node to `head_ref`
-   - Update `head_ref` to point to the new node
+   - If the linked list is empty, set `head_ref` to the new node
+   - Otherwise, traverse to the end and insert the new node
 
-### 5. Define `bubbleSort(start)`
+### 5. Define `bubbleSort(head)`
+   - If the list is empty, return
+   - Initialize a pointer `last = NULL`
    - Repeat until no swaps are needed:
-     - Traverse the linked list
-     - Swap adjacent nodes if they are out of order using `swap(a, b)`
+     - Set `swapped = 0`
+     - Start from the `head`
+     - Traverse the linked list until reaching the last sorted node:
+       - If two adjacent nodes are out of order, swap their data using `swap(a, b)`
+       - Set `swapped = 1`
+     - Update `last` to the last checked node
 
 ### 6. Define `swap(a, b)`
-   - Swap the `data` values of nodes `a` and `b`
+   - Swap the data values of nodes `a` and `b`
 
-### 7. Define `printList(node)`
+### 7. Define `printList(head)`
    - Traverse the linked list and print each node’s `data`
 
 ### 8. End
+
 
 
 #include <stdio.h>
@@ -42,51 +51,60 @@ struct Node {
     struct Node* next;
 };
 
-void swap(struct Node *a, struct Node *b);
-
-void bubbleSort(struct Node *start) {
-    int swapped;
-    struct Node *ptr1;
-    struct Node *lptr = NULL;
-
-    if (start == NULL) {
-	return;
-    }
-
-    do {
-	swapped = 0;
-	ptr1 = start;
-
-	while (ptr1->next != lptr) {
-	    if (ptr1->data > ptr1->next->data) {
-		swap(ptr1, ptr1->next);
-		swapped = 1;
-	    }
-	    ptr1 = ptr1->next;
-	}
-	lptr = ptr1;
-    }
-    while (swapped);
-}
-
 void swap(struct Node *a, struct Node *b) {
     int temp = a->data;
     a->data = b->data;
     b->data = temp;
 }
 
-void push(struct Node** head_ref, int new_data) {
-    struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
-    new_node->data  = new_data;
-    new_node->next = (*head_ref);
-    (*head_ref) = new_node;
+void bubbleSort(struct Node *head) {
+    if (head == NULL) {
+        return;
+    }
+
+    int swapped;
+    struct Node *temp;
+    struct Node *last = NULL;
+
+    do {
+        swapped = 0;
+        temp = head;
+
+        while (temp->next != last) {
+            if (temp->data > temp->next->data) {
+                swap(temp, temp->next);
+                swapped = 1;
+            }
+            temp = temp->next;
+        }
+        last = temp;
+    } while (swapped);
 }
 
-void printList(struct Node *node) {
-    while (node != NULL) {
-	printf(" %d ", node->data);
-	node = node->next;
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+        return;
     }
+
+    struct Node* temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
+
+void printList(struct Node* head) {
+    printf("\nCurrent List: ");
+    while (head) {
+        printf("%d -> ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
 }
 
 int main() {
@@ -94,13 +112,13 @@ int main() {
 
     clrscr();
 
-    push(&head, 9);
-    push(&head, 4);
-    push(&head, 5);
-    push(&head, 2);
-    push(&head, 5);
-    push(&head, 7);
-    push(&head, 1);
+    insertNode(&head, 9);
+    insertNode(&head, 4);
+    insertNode(&head, 5);
+    insertNode(&head, 2);
+    insertNode(&head, 5);
+    insertNode(&head, 7);
+    insertNode(&head, 1);
 
     printf("Linked list before sorting: \n");
     printList(head);
@@ -113,3 +131,4 @@ int main() {
     getch();
     return 0;
 }
+
