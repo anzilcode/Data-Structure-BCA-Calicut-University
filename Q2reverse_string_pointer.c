@@ -1,4 +1,5 @@
-## Algorithm for Reversing a String Using Pointers
+# Reverse a String Using Pointers 
+## Algorithm 
 
 ### 1. Start
 
