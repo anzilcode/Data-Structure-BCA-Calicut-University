@@ -1,4 +1,5 @@
-## Algorithm for Appending Two Arrays
+## Appending Two Arrays
+## Algorithm 
 
 ### 1. Start
 
