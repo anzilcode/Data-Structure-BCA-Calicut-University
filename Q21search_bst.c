@@ -1,21 +1,18 @@
-### **Algorithm: Search an Element in BST**
+## Algorithm: Search in a Binary Search Tree (BST)
 
-1. **Start**
-2. **Main Function**
-   - Clear the screen.
-   - Create a BST by inserting elements.
-   - Prompt the user to enter the element to search.
-   - Call the search function.
-   - Display if the element is found or not.
-   - Wait for user input before exiting.
-
-3. **Search Function**
-   - If the tree is empty, return NULL.
-   - If the element matches the root, return the root node.
-   - If the element is smaller than the root, search in the left subtree.
-   - If the element is greater than the root, search in the right subtree.
-
-4. **Stop**
+### Step 1: Start
+### Step 2: Define the `main()` function  
+   - Prompt the user to enter the number of elements in the BST.  
+   - Insert the elements into the BST.  
+   - Prompt the user to enter the element to search.  
+   - Call the `searchBST()` function.  
+   - Display whether the element is found or not.  
+### Step 3: Define the `searchBST(root, key)` function  
+   - If the `root` is `NULL`, return `Not Found`.  
+   - If `root->data == key`, return `Found`.  
+   - If `key < root->data`, recursively call `searchBST(root->left, key)`.  
+   - Otherwise, recursively call `searchBST(root->right, key)`.  
+### Step 4: Stop
 
 
 #include <stdio.h>
