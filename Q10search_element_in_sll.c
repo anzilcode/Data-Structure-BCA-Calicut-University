@@ -80,13 +80,13 @@ void display(struct Node* head) {
 
 int main() {
     struct Node* head = NULL;
-    int n, value, key;
+    int n, i , value, key;
 
     printf("Enter the number of elements: ");
     scanf("%d", &n);
 
     printf("Enter the elements:\n");
-    for (int i = 0; i < n; i++) {
+    for (i = 0; i < n; i++) {
         scanf("%d", &value);
         insertEnd(&head, value);
     }
