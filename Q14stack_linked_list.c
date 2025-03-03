@@ -1,6 +1,6 @@
 ## Algorithm for Stack Operations using Linked List
 
-### 1. Start
+### 1.  Start
 
 ### 2. Define global structure and functions
    - Define `struct Node` with:
