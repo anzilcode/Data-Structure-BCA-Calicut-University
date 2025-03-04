@@ -11,8 +11,10 @@
    - Use `insertNode` to add nodes with values `{10, 20, 30, 50, 40}`
    - Print the linked list
    - Display a menu with options:
-     1. Delete a node
+     1. Delete a node 
+         - deleteNode(head, value)
      2. Print the list
+         - printList(head)
      3. Exit
    - Perform operations based on user input
 
