@@ -5,7 +5,6 @@
 ### 2. Define `main()` function
    - Declare a 2D array `a[100][3]` to store the sparse matrix representation.
    - Declare integer variables `m`, `n`, `i`, `j`, `l = 1`, `x`, and `k`.
-   - Clear the screen using `clrscr()` (specific to Turbo C).
    - Prompt the user to enter the order (dimensions) of the matrix.
    - Read the values of `m` and `n`.
 
@@ -33,8 +32,6 @@
    - Print a message: "The sparse matrix is:"
    - Loop through the sparse matrix:
      - Print each row of the 3-column format.
-
-### 6. Wait for user input using `getch()`
 
 ### 7. End
 
