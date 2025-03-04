@@ -21,8 +21,7 @@ Naïve Pattern Matching
 
 5. **End**
 
-
-  #include <stdio.h>
+#include <stdio.h>
 #include <conio.h>
 #include <string.h>
 
@@ -42,12 +41,10 @@ void naivePatternMatch(char text[], char pattern[]) {
             found = 1;
         }
     }
-
     if (!found) {
         printf("Pattern not found.\n");
     }
 }
-
 int main() {
     char text[100], pattern[50];
     clrscr();
