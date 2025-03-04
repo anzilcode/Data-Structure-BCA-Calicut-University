@@ -1,4 +1,4 @@
-# Algorithm
+# Algorithm create and display singly linked list
 
 ## 1. Start  
 ## 2. Declare Structures  
@@ -7,26 +7,24 @@
      - `next` (pointer to next node)  
 
 ## 3. main() Function  
-   1. Declare variables:  
-      - `head` (pointer to store the head of the linked list)  
-      - `n` (number of nodes)  
-      - `value` (to store user input)  
-      - `i` (loop counter)  
+      1. Declare variables:  
+         - `head` (pointer to store the head of the linked list)  
+         - `n` (number of nodes)  
+         - `value` (to store user input)  
+         - `i` (loop counter)   
 
-   2. Clear the screen using `clrscr()` (for Turbo C users)  
+      2. Prompt the user for the number of nodes and read `n`  
 
-   3. Prompt the user for the number of nodes and read `n`  
+      3. Loop from `0` to `n-1`:  
+         - Ask for node value  
+         - If `head` is `NULL`, create the first node using `createNode(value)`  
+         - Otherwise, insert the node at the end using `insertNode(head, value)`
 
-   4. Loop from `0` to `n-1`:  
-      - Ask for node value  
-      - If `head` is `NULL`, create the first node using `createNode(value)`  
-      - Otherwise, insert the node at the end using `insertNode(head, value)`
+   4. Display the linked list using `displayList(head)`
 
-   5. Display the linked list using `displayList(head)`
+   5. Wait for user input using `getch()`
 
-   6. Wait for user input using `getch()`
-
-   7. End  
+   6. End  
 
 ## 4. createNode(value) Function  
    - Allocate memory for a new node  
