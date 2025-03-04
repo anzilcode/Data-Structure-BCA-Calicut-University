@@ -22,9 +22,7 @@
 
    4. Display the linked list using `displayList(head)`
 
-   5. Wait for user input using `getch()`
-
-   6. End  
+   5. End  
 
 ## 4. createNode(value) Function  
    - Allocate memory for a new node  
