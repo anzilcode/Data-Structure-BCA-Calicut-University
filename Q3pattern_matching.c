@@ -24,7 +24,6 @@ Naïve Pattern Matching
 #include <stdio.h>
 #include <conio.h>
 #include <string.h>
-
 void naivePatternMatch(char text[], char pattern[]) {
     int textLen = strlen(text);
     int patternLen = strlen(pattern);
