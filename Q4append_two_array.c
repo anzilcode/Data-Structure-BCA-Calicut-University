@@ -6,14 +6,12 @@
 ### 2. Define `main()` function
    - Declare integer variables `size1`, `size2`, and `i`.
    - Declare three arrays: `arr1` of size `SIZE`, `arr2` of size `SIZE`, and `result` of size `SIZE * 2`.
-   - Clear screen using `clrscr()` (specific to Turbo C).
    - Prompt user to enter the number of elements in the first array.
    - Read and store the values in `arr1`.
    - Prompt user to enter the number of elements in the second array.
    - Read and store the values in `arr2`.
    - Call `appendArrays(arr1, size1, arr2, size2, result)`.
    - Print the appended array.
-   - Wait for user input using `getch()`.
    - End.
 
 ### 3. Define function `appendArrays(arr1, size1, arr2, size2, result)`
