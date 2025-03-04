@@ -6,11 +6,6 @@
    - Define `struct Node` with:
      - `int data`
      - `struct Node* next`
-   - Define functions:
-     - `push(struct Node** top, int value)`
-     - `pop(struct Node** top)`
-     - `isEmpty(struct Node* top)`
-     - `display(struct Node* top)`
 
 ### 3. Define `main()`
    - Initialize `struct Node* top = NULL`
