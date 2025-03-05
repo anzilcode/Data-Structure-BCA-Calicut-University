@@ -1,30 +1,51 @@
 # Algorithm for Evaluating a Postfix Expression
 
-## Step 1: Initialize Stack
-- Create an empty stack to store operands.
+## Step 1: Define the main function
 
-## Step 2: Process Each Character in the Expression
-- Read the postfix expression from left to right.
+### Function: main()
+- Clear the screen using `clrscr()`.
+- Read the postfix expression using `gets()`.
+- Call `evaluatePostfix(exp)` to compute the result.
+- Print the final result.
+- Use `getch()` to wait for user input before exiting.
 
-## Step 3: If the Character is an Operand (Digit)
-- Convert it to an integer.
-- Push it onto the stack.
+## Step 2: Define Stack Operations
 
-## Step 4: If the Character is an Operator
-- Pop two operands from the stack.
-- Perform the operation based on the operator.
-- Push the result back onto the stack.
+### Function: push(value)
+- If the stack is full, print "Stack Overflow" and return.
+- Increment `top` and store `value` in `stack[top]`.
 
-## Step 5: Continue Until End of Expression
-- Repeat the above steps until the entire expression is processed.
+### Function: pop()
+- If the stack is empty, print "Stack Underflow" and exit.
+- Return `stack[top]` and decrement `top`.
 
-## Step 6: Get the Final Result
-- The final result will be the only element left in the stack.
+## Step 3: Define the Postfix Evaluation Function
+
+### Function: evaluatePostfix(exp)
+- Initialize `num = 0`.
+- While there are characters in `exp`:
+  - If the character is a digit:
+    - Set `num = 0`.
+    - While the character is a digit:
+      - Multiply `num` by 10 and add the digit to `num`.
+      - Move to the next character.
+    - Push `num` onto the stack.
+  - If the character is an operator:
+    - Pop two operands (`opr1`, `opr2`).
+    - Perform the corresponding operation:
+      - Addition (`+`): `result = opr2 + opr1`
+      - Subtraction (`-`): `result = opr2 - opr1`
+      - Multiplication (`*`): `result = opr2 * opr1`
+      - Division (`/`): Check if `opr1` is zero to avoid division by zero.
+    - Push `result` onto the stack.
+  - Move to the next character.
+- Return the final value from the stack.
+
 
 
 #include <stdio.h>
-#include <ctype.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <conio.h>
 
 #define MAX_SIZE 20
@@ -48,17 +69,25 @@ int pop() {
 }
 
 int evaluatePostfix(char *exp) {
-    int opr1, opr2, result;
+    int num = 0, opr1, opr2, result;
+    char ch;
 
-    while (*exp != '\0') {
-	if (isdigit(*exp)) {
-	    push(*exp - '0');
-	} else if (*exp == ' ') {
-	} else {
+    while (*exp) {
+	ch = *exp;
+
+	if (isdigit(ch)) {
+	    num = 0;
+	    while (isdigit(*exp)) {
+		num = num * 10 + (*exp - '0');
+		exp++;
+	    }
+	    push(num);
+	}
+	else if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
 	    opr1 = pop();
 	    opr2 = pop();
 
-	    switch (*exp) {
+	    switch (ch) {
 		case '+': result = opr2 + opr1; break;
 		case '-': result = opr2 - opr1; break;
 		case '*': result = opr2 * opr1; break;
@@ -70,7 +99,7 @@ int evaluatePostfix(char *exp) {
 		    result = opr2 / opr1;
 		    break;
 		default:
-		    printf("Error: Invalid operator '%c'\n", *exp);
+		    printf("Error: Invalid operator '%c'\n", ch);
 		    return -1;
 	    }
 	    push(result);
@@ -81,15 +110,16 @@ int evaluatePostfix(char *exp) {
 }
 
 int main() {
-    char exp[MAX_SIZE];
+    char exp[100];
+    int finalResult;
+
     clrscr();
-
     printf("Enter the postfix expression: ");
-    scanf("%s", exp);
+    gets(exp);
 
-    int finalResult = evaluatePostfix(exp);
+    finalResult = evaluatePostfix(exp);
     if (finalResult != -1) {
-	printf("Result of expression %s = %d\n", exp, finalResult);
+	printf("Result of expression = %d\n", finalResult);
     }
 
     getch();
