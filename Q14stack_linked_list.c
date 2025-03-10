@@ -61,12 +61,13 @@ int isEmpty(struct Node* top) {
 }
 
 int pop(struct Node** top) {
+    int poppedValue;
     if (isEmpty(*top)) {
 	printf("Stack underflow\n");
 	return -1;
     }
     struct Node* temp = *top;
-    int poppedValue = temp->data;
+    poppedValue = temp->data;
     *top = (*top)->next;
     free(temp);
     return poppedValue;
