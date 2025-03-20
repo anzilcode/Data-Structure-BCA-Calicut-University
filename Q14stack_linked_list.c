@@ -1,38 +1,44 @@
 ## Algorithm for Stack Operations using Linked List
 
-### 1.  Start
+### 1. Start  
 
-### 2. Define global structure and functions
-   - Define `struct Node` with:
-     - `int data`
-     - `struct Node* next`
+### 2. Define Node Structure  
+   - Create `struct Node` with:  
+     - `int data`  
+     - `struct Node* next`  
 
-### 3. Define `main()`
-   - Initialize `struct Node* top = NULL`
-   - Display menu with options:
-     1. Push
-     2. Pop
-     3. Display
-     4. Exit
-   - Perform operations based on user choice
+### 3. Define `main()`  
+   - Initialize `struct Node* top = NULL`  
+   - Display menu with options:  
+     1. Push  
+     2. Pop  
+     3. Display  
+     4. Exit  
+   - Perform operations based on user choice  
 
-### 4. Define `push(struct Node** top, int value)`
-   - Allocate memory for a new node
-   - If allocation fails, print "Heap overflow"
-   - Insert `value` at the top of the stack
-   - Update `top` pointer
+### 4. Define `push(struct Node** top, int value)`  
+   - Allocate memory for a new node  
+   - If allocation fails, print `"Heap overflow"`  
+   - Assign `value` to `newNode->data`  
+   - Set `newNode->next` to `top`  
+   - Update `top` pointer  
 
-### 5. Define `pop(struct Node** top)`
-   - Check if stack is empty (`isEmpty(top)`)
-   - If empty, print "Stack underflow"
-   - Otherwise, remove and return the top element
-   - Update `top` pointer
+### 5. Define `pop(struct Node** top)`  
+   - If `top` is `NULL`, print `"Stack underflow"`  
+   - Otherwise:  
+     - Store `top->data` in `poppedValue`  
+     - Move `top` to the next node  
+     - Free the removed node  
+     - Return `poppedValue`  
 
-### 6. Define `display(struct Node* top)`
-   - If stack is empty, print "Stack is empty"
-   - Otherwise, traverse the linked list and print elements
+### 6. Define `display(struct Node* top)`  
+   - If `top` is `NULL`, print `"Stack is empty"`  
+   - Otherwise:  
+     - Traverse the linked list  
+     - Print each node's data  
 
-### 7. End
+### 7. End  
+
 
 
 #include <stdio.h>
@@ -56,14 +62,10 @@ void push(struct Node** top, int value) {
     printf("%d pushed onto stack.\n", value);
 }
 
-int isEmpty(struct Node* top) {
-    return top == NULL;
-}
-
 int pop(struct Node** top) {
     struct Node* temp = *top;
     int poppedValue;
-    if (isEmpty(*top)) {
+    if (*top == NULL) {
 	printf("Stack underflow\n");
 	return -1;
     }
@@ -74,7 +76,7 @@ int pop(struct Node** top) {
 }
 
 void display(struct Node* top) {
-    if (isEmpty(top)) {
+    if (top == NULL) {
 	printf("Stack is empty\n");
 	return;
     }
