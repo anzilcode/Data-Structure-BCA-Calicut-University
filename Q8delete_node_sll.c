@@ -45,6 +45,7 @@ struct Node {
 };
 
 void insertNode(struct Node** head, int value) {
+    struct Node* temp = *head;
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = value;
     newNode->next = NULL;
@@ -54,7 +55,6 @@ void insertNode(struct Node** head, int value) {
         return;
     }
 
-    struct Node* temp = *head;
     while (temp->next != NULL) {
         temp = temp->next;
     }
