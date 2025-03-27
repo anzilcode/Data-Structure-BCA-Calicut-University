@@ -1,72 +1,96 @@
-## Algorithm for Queue Operations using Linked List
+# Algorithm for Queue Operations using Linked List
 
+## 1. Start
 
-1. Start
+## 2. Define Global Structure and Functions
+- **Define `struct Node`** with:
+  - `int data` → To store the value
+  - `struct Node* next` → Pointer to the next node
+- **Define global pointers**:
+  - `struct Node* front = NULL`
+  - `struct Node* rear = NULL`
+- **Define functions**:
+  - `void enqueue(int value)`
+  - `int dequeue()`
+  - `void display()`
 
-2. Define global structure and functions
-   - Define `struct Node` with:
-     - `int data`
-     - `struct Node* next`
-   - Define global pointers:
-     - `struct Node* front = NULL`
-     - `struct Node* rear = NULL`
-   - Define functions:
-     - `enqueue(int value)`
-     - `dequeue()`
-     - `isEmpty()`
-     - `display()`
+---
 
-3. Define `main()`
-   - Call `clrscr()` to clear the screen
-   - Declare variables `choice` and `value`
-   - Start an infinite loop:
-     - Display menu:
-       1. Enqueue
-       2. Dequeue
-       3. Display
-       4. Exit
-     - Prompt user to enter a choice
-     - Read user input into `choice`
-     - Use `switch-case` to perform operations:
-       - Case 1:  
-         - Prompt user to enter value  
-         - Read input into `value`  
-         - Call `enqueue(value)`
-       - Case 2:  
-         - Call `dequeue()` and store returned value  
-         - If valid, print the dequeued value  
-       - Case 3:  
-         - Call `display()` to show the queue  
-       - Case 4:  
-         - Print `"Exiting..."`  
-         - Call `exit(0)`  
-       - Default:  
-         - Print `"Invalid choice, try again"`
+## 3. Define `main()`
+1. Call `clrscr()` to clear the screen (Turbo C requirement).
+2. Declare variables `choice` and `value`.
+3. Start an infinite loop:
+   - Display menu:
+     ```
+     --- Queue Menu ---
+     1. Enqueue
+     2. Dequeue
+     3. Display Queue
+     4. Exit
+     ```
+   - Prompt user to enter a choice.
+   - Read user input into `choice`.
+   - Use `switch-case` to perform operations:
+     - **Case 1**:  
+       - Prompt user to enter value.
+       - Read input into `value`.
+       - Call `enqueue(value)`.
+     - **Case 2**:  
+       - Call `dequeue()` and store the returned value.
+       - If valid, print the dequeued value.
+     - **Case 3**:  
+       - Call `display()` to show the queue.
+     - **Case 4**:  
+       - Print `"Exiting program..."`.
+       - Call `getch()` and exit.
+     - **Default**:  
+       - Print `"Invalid choice, try again"`.
 
-4. Define `enqueue(int value)`
-   - Allocate memory for a new node
-   - If memory allocation fails, print `"Heap overflow"`
-   - Set `data = value`, `next = NULL`
-   - If queue is empty (`rear == NULL`), update `front` and `rear` to point to new node
-   - Else, link the new node to `rear->next` and update `rear`
+---
 
-5. Define `dequeue()`
-   - Check if queue is empty (`isEmpty()`)
-   - If empty, print `"Queue underflow"`
-   - Otherwise, remove and return the front element
-   - Update `front` pointer
-   - If `front` becomes `NULL`, set `rear = NULL`
+## 4. Define `enqueue(int value)`
+1. Allocate memory for a new node.
+2. If memory allocation fails, print `"Memory allocation failed"` and return.
+3. Set:
+   ```c
+   newNode->data = value;
+   newNode->next = NULL;
+   ```
+4. If the queue is empty (`rear == NULL`):
+   - Set `front = rear = newNode`.
+5. Else:
+   - Set `rear->next = newNode`.
+   - Update `rear = newNode`.
+6. Print `"Value enqueued"`.
+---
+## 5. Define `dequeue()`
+1. If `front == NULL` (Queue is empty), print `"Queue underflow"` and return `-1`.
+2. Store the front node in a temporary pointer `temp = front`.
+3. Store `temp->data` in `value`.
+4. Update `front = front->next`.
+5. If `front == NULL`, set `rear = NULL`.
+6. Free the memory of `temp`.
+7. Return `value`.
+---
+## 6. Define `display()`
+1. If `front == NULL`, print `"Queue is empty"` and return.
+2. Set a temporary pointer `temp = front`.
+3. Print `"Queue: "`.
+4. Traverse the linked list:
+   ```c
+   while (temp) {
+       printf("%d -> ", temp->data);
+       temp = temp->next;
+   }
+   ```
+5. Print `"NULL"`.
+## 7. End
 
-6. Define `display()`
-   - If queue is empty, print `"Queue is empty"`
-   - Otherwise, traverse the linked list and print elements
-
-7. End
 
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <conio.h>
+#include <stdlib.h>
 
 struct Node {
     int data;
@@ -78,6 +102,11 @@ struct Node* rear = NULL;
 
 void enqueue(int value) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        printf("Memory allocation failed.\n");
+        return;
+    }
+    
     newNode->data = value;
     newNode->next = NULL;
 
@@ -87,39 +116,37 @@ void enqueue(int value) {
         rear->next = newNode;
         rear = newNode;
     }
-    printf("%d enqueued.\n", value);
-}
-
-int isEmpty() {
-    return front == NULL;
+    printf("\n%d enqueued.\n", value);
 }
 
 int dequeue() {
-    if (isEmpty()) {
-        printf("Queue underflow\n");
-        return -1;
-    }
     struct Node* temp = front;
-    int value = temp->data;
+    int value;
+    if (front == NULL) {
+	printf("\nQueue underflow!\n");
+	return -1;
+    }
+    value = temp->data;
     front = front->next;
 
     if (front == NULL)
-        rear = NULL;
+	rear = NULL;
 
     free(temp);
     return value;
 }
 
 void display() {
-    if (isEmpty()) {
-        printf("Queue is empty\n");
-        return;
-    }
     struct Node* temp = front;
-    printf("Queue: ");
+    if (temp == NULL) {
+	printf("\nQueue is empty!\n");
+	return;
+    }
+
+    printf("\nQueue: ");
     while (temp) {
-        printf("%d -> ", temp->data);
-        temp = temp->next;
+	printf("%d -> ", temp->data);
+	temp = temp->next;
     }
     printf("NULL\n");
 }
@@ -129,33 +156,34 @@ int main() {
     clrscr();
 
     while (1) {
-        printf("\n--- Queue Menu ---\n");
-        printf("1. Enqueue\n2. Dequeue\n3. Display Queue\n4. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+	printf("\n--- Queue Menu ---\n");
+	printf("1. Enqueue\n2. Dequeue\n3. Display Queue\n4. Exit\n");
+	printf("Enter your choice: ");
+	scanf("%d", &choice);
 
-        switch (choice) {
-            case 1:
-                printf("Enter value to enqueue: ");
-                scanf("%d", &value);
-                enqueue(value);
-                break;
-            case 2:
-                value = dequeue();
-                if (value != -1)
-                    printf("%d dequeued.\n", value);
-                break;
-            case 3:
-                display();
-                break;
-            case 4:
-                printf("Exiting...\n");
-                getch();
-                return 0;
-            default:
-                printf("Invalid choice, try again.\n");
-        }
+	switch (choice) {
+	    case 1:
+		printf("Enter value to enqueue: ");
+		scanf("%d", &value);
+		enqueue(value);
+		break;
+	    case 2:
+		value = dequeue();
+		if (value != -1)
+		    printf("\n%d dequeued.\n", value);
+		break;
+	    case 3:
+		display();
+		break;
+	    case 4:
+		printf("\nExiting program...\n");
+		getch();
+		return 0;
+	    default:
+		printf("\nInvalid choice, try again.\n");
+	}
     }
+
     getch();
     return 0;
 }
