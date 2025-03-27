@@ -1,27 +1,44 @@
-#  Addition of Two Polynomials using Arrays
+# Polynomial Addition Using Arrays
 
-## **Step 1: Implement `main` function**
+## **Algorithm**
+
+### **Step 1: Implement `main` Function**
 1. Declare arrays `poly1[]`, `poly2[]`, and `result[]`.
-2. Read `deg1` and coefficients for `poly1[]`.
-3. Read `deg2` and coefficients for `poly2[]`.
+2. Read the degree `deg1` and coefficients for `poly1[]`.
+3. Read the degree `deg2` and coefficients for `poly2[]`.
 4. Call `addPolynomials(poly1, poly2, result, deg1, deg2)`.
-5. Wait for user input before exiting.
+5. Display the resultant polynomial.
+6. Wait for user input before exiting.
 
-## **Step 2: Define the function `addPolynomials`**
-1. Accept arrays `poly1[]`, `poly2[]`, and `result[]` along with degrees `deg1` and `deg2`.
-2. Find the maximum degree `maxDeg` of the two polynomials.
-3. Initialize `result[]` with zeros.
+---
 
-## **Step 3: Align and add polynomials**
-1. Copy `poly1[]` into `result[]`, shifting indices based on `(maxDeg - deg1)`.
-2. Add `poly2[]` into `result[]`, aligning with `(maxDeg - deg2)`.
-3. Sum corresponding coefficients.
+### **Step 2: Define `addPolynomials` Function**
+1. Accept input arrays `poly1[]`, `poly2[]`, and `result[]`, along with their degrees `deg1` and `deg2`.
+2. Determine the highest degree `maxDeg` among `deg1` and `deg2`.
+3. Initialize all elements of `result[]` to zero.
 
-## **Step 4: Print the resultant polynomial**
-1. Iterate over `result[]` from highest to lowest exponent.
-2. Display the polynomial in the form `ax^b + cx^d + ...`.
+---
 
-## **Step 5: End**
+### **Step 3: Perform Polynomial Addition**
+1. Copy `poly1[]` into `result[]`, aligning indices based on `(maxDeg - deg1)`.
+2. Add `poly2[]` into `result[]`, aligning indices based on `(maxDeg - deg2)`.
+3. Perform coefficient-wise addition to form the resultant polynomial.
+
+---
+
+### **Step 4: Print the Resultant Polynomial**
+1. Traverse `result[]` from the highest exponent to the lowest.
+2. Print terms in the format:  
+   - If exponent > 0: `ax^b`
+   - If exponent = 0: `c` (constant term)
+3. Ensure correct formatting by handling cases such as:  
+   - Avoiding printing `+` at the end.
+   - Skipping terms where the coefficient is zero.
+
+---
+
+### **Step 5: End**
+
 
 
 #include <stdio.h>
@@ -29,31 +46,29 @@
 
 void addPolynomials(int poly1[], int poly2[], int result[], int deg1, int deg2) {
     int maxDeg = (deg1 > deg2) ? deg1 : deg2;
-    int minDeg = (deg1 < deg2) ? deg1 : deg2;
     int i;
 
     for (i = 0; i <= maxDeg; i++) {
-        result[i] = 0;
-    }
-
-    for (i = 0; i <= deg1; i++) {
-        result[i + (maxDeg - deg1)] = poly1[i];
-    }
-
-    for (i = 0; i <= deg2; i++) {
-        result[i + (maxDeg - deg2)] += poly2[i];
+        int coeff1 = (i <= deg1) ? poly1[i] : 0;
+        int coeff2 = (i <= deg2) ? poly2[i] : 0;
+        result[i] = coeff1 + coeff2;
     }
 
     printf("\nResultant Polynomial: ");
     for (i = 0; i <= maxDeg; i++) {
-        printf("%dx^%d", result[i], maxDeg - i);
-        if (i < maxDeg) {
-            printf(" + ");
+        if (result[i] != 0) {  
+            printf("%d", result[i]);
+            if (maxDeg - i > 0) {
+                printf("x^%d", maxDeg - i);
+            }
+            if (i < maxDeg) {
+                printf(" + ");
+            }
         }
     }
 }
 
-int main() {
+void main() {
     int poly1[10], poly2[10], result[10];
     int deg1, deg2, i;
 
@@ -76,5 +91,4 @@ int main() {
     addPolynomials(poly1, poly2, result, deg1, deg2);
 
     getch();
-    return 0;
 }
