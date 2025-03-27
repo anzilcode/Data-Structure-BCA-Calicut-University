@@ -46,6 +46,7 @@ struct Node {
 };
 
 void insertEnd(struct Node** head, int data) {
+    struct Node* temp = *head;
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = data;
     newNode->next = NULL;
@@ -56,7 +57,6 @@ void insertEnd(struct Node** head, int data) {
 	return;
     }
 
-    struct Node* temp = *head;
     while (temp->next != NULL) {
 	temp = temp->next;
     }
@@ -76,9 +76,9 @@ void displayForward(struct Node* head) {
 }
 
 void displayBackward(struct Node* head) {
-    if (head == NULL) return;
-
     struct Node* temp = head;
+    if (head == NULL) return;
+	
     while (temp->next != NULL) {
 	temp = temp->next;
     }
