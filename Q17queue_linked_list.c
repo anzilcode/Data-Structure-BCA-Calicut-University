@@ -1,90 +1,56 @@
-# Algorithm for Queue Operations using Linked List
 
-## 1. Start
 
-## 2. Define Global Structure and Functions
-- **Define `struct Node`** with:
-  - `int data` → To store the value
-  - `struct Node* next` → Pointer to the next node
-- **Define global pointers**:
-  - `struct Node* front = NULL`
-  - `struct Node* rear = NULL`
-- **Define functions**:
-  - `void enqueue(int value)`
-  - `int dequeue()`
-  - `void display()`
+## Algorithm for Queue Operations using Linked List
 
----
+### 1. Start
 
-## 3. Define `main()`
-1. Call `clrscr()` to clear the screen (Turbo C requirement).
-2. Declare variables `choice` and `value`.
-3. Start an infinite loop:
-   - Display menu:
-     ```
-     --- Queue Menu ---
-     1. Enqueue
-     2. Dequeue
-     3. Display Queue
-     4. Exit
-     ```
-   - Prompt user to enter a choice.
-   - Read user input into `choice`.
-   - Use `switch-case` to perform operations:
-     - **Case 1**:  
-       - Prompt user to enter value.
-       - Read input into `value`.
-       - Call `enqueue(value)`.
-     - **Case 2**:  
-       - Call `dequeue()` and store the returned value.
-       - If valid, print the dequeued value.
-     - **Case 3**:  
-       - Call `display()` to show the queue.
-     - **Case 4**:  
-       - Print `"Exiting program..."`.
-       - Call `getch()` and exit.
-     - **Default**:  
-       - Print `"Invalid choice, try again"`.
+### 2. Define Node Structure
+- Create a structure `Node` with:
+  - `int data` to hold the value
+  - `struct Node* next` to point to the next node
 
----
+### 3. Initialize Pointers
+- Declare and initialize two pointers:
+  - `front = NULL`
+  - `rear = NULL`
 
-## 4. Define `enqueue(int value)`
-1. Allocate memory for a new node.
-2. If memory allocation fails, print `"Memory allocation failed"` and return.
-3. Set:
-   ```c
-   newNode->data = value;
-   newNode->next = NULL;
-   ```
-4. If the queue is empty (`rear == NULL`):
-   - Set `front = rear = newNode`.
-5. Else:
-   - Set `rear->next = newNode`.
-   - Update `rear = newNode`.
-6. Print `"Value enqueued"`.
----
-## 5. Define `dequeue()`
-1. If `front == NULL` (Queue is empty), print `"Queue underflow"` and return `-1`.
-2. Store the front node in a temporary pointer `temp = front`.
-3. Store `temp->data` in `value`.
-4. Update `front = front->next`.
-5. If `front == NULL`, set `rear = NULL`.
-6. Free the memory of `temp`.
-7. Return `value`.
----
-## 6. Define `display()`
-1. If `front == NULL`, print `"Queue is empty"` and return.
-2. Set a temporary pointer `temp = front`.
-3. Print `"Queue: "`.
-4. Traverse the linked list:
-   ```c
-   while (temp) {
-       printf("%d -> ", temp->data);
-       temp = temp->next;
-   }
-   ```
-5. Print `"NULL"`.
-## 7. End
+### 4. Display Menu in Loop
+- Use a loop to display the following options to the user:
+  1. Enqueue
+  2. Dequeue
+  3. Display
+  4. Exit
+- Perform the corresponding operation based on user input
+
+### 5. Enqueue Operation
+- Create a new node using dynamic memory allocation
+- If memory allocation fails, print "Memory allocation failed"
+- Set `newNode->data = value`, and `newNode->next = NULL`
+- If `rear == NULL` (queue is empty):
+  - Set both `front` and `rear` to `newNode`
+- Else:
+  - Set `rear->next = newNode`
+  - Update `rear = newNode`
+- Print the enqueued value
+
+### 6. Dequeue Operation
+- If `front == NULL`, print "Queue underflow"
+- Else:
+  - Store the value from `front->data`
+  - Move `front` to `front->next`
+  - If `front == NULL`, also set `rear = NULL`
+  - Free the dequeued node
+  - Print the dequeued value
+
+### 7. Display Operation
+- If `front == NULL`, print "Queue is empty"
+- Else:
+  - Traverse from `front` to `rear`, printing each node's data
+
+### 8. Exit
+- If the user chooses to exit, terminate the loop and end the program
+
+### 9. End
 
 
 
