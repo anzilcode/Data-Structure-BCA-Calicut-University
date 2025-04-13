@@ -1,3 +1,7 @@
+Output works correctly for small degrees (0,1).
+   For larger degrees, the power printing order needs adjustment.
+
+
 # Polynomial Addition Using Arrays
 
 ## **Algorithm**
