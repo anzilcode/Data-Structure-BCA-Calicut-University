@@ -46,11 +46,11 @@
 
 void addPolynomials(int poly1[], int poly2[], int result[], int deg1, int deg2) {
     int maxDeg = (deg1 > deg2) ? deg1 : deg2;
-    int i;
+    int i,coeff1,coeff2;
 
     for (i = 0; i <= maxDeg; i++) {
-        int coeff1 = (i <= deg1) ? poly1[i] : 0;
-        int coeff2 = (i <= deg2) ? poly2[i] : 0;
+         coeff1 = (i <= deg1) ? poly1[i] : 0;
+         coeff2 = (i <= deg2) ? poly2[i] : 0;
         result[i] = coeff1 + coeff2;
     }
 
