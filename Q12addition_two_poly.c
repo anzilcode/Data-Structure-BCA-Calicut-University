@@ -1,5 +1,3 @@
-Output works correctly for small degrees (0,1).
-   For larger degrees, the power printing order needs adjustment.
 
 
 # Polynomial Addition Using Arrays
@@ -50,22 +48,22 @@ Output works correctly for small degrees (0,1).
 
 void addPolynomials(int poly1[], int poly2[], int result[], int deg1, int deg2) {
     int maxDeg = (deg1 > deg2) ? deg1 : deg2;
-    int i,coeff1,coeff2;
+    int i, coeff1, coeff2;
 
     for (i = 0; i <= maxDeg; i++) {
-         coeff1 = (i <= deg1) ? poly1[i] : 0;
-         coeff2 = (i <= deg2) ? poly2[i] : 0;
+        coeff1 = (i <= deg1) ? poly1[i] : 0;
+        coeff2 = (i <= deg2) ? poly2[i] : 0;
         result[i] = coeff1 + coeff2;
     }
 
     printf("\nResultant Polynomial: ");
-    for (i = 0; i <= maxDeg; i++) {
-        if (result[i] != 0) {  
+    for (i = maxDeg; i >= 0; i--) {
+        if (result[i] != 0) {
             printf("%d", result[i]);
-            if (maxDeg - i > 0) {
-                printf("x^%d", maxDeg - i);
+            if (i > 0) {
+                printf("x^%d", i);
             }
-            if (i < maxDeg) {
+            if (i > 0) {
                 printf(" + ");
             }
         }
